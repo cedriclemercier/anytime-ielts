@@ -6,6 +6,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
   path('', views.index, name='index'),
   path('writing/', views.writing_page, name='writing'),
+  path('band_score/', views.band_score_page, name='band_score'),
 
   # Components
   path('components/button/', views.bc_button, name='bc_button'),

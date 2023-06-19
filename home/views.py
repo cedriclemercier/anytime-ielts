@@ -14,9 +14,22 @@ def index(request):
 
 def writing_page(request):
   context = {
-    'segment': 'writing'
+    'segment': 'writing',
+    'answer': """One of the most debatable issues of the last century has been the extent to which international trade benefits or harms national economies. Many arguments have been made for and against free trade between nations. In this essay, I will discuss both views and state my own position.
+
+Those who support the expansion of global free trade claim that economies grow faster when they can specialise in just a few industries in which they have a strong advantage. As a result, each region or country produces something of value to the world economy. For example, East Asia manufactures electronic goods, the Middle East exports energy, and the EU produces luxury items. Free trade proponents claim that dependence on global trade helps to strengthen international cooperation and prevent wars.
+
+Meanwhile, opponents of free trade—sometimes called ‘protectionists’—claim that the unrestricted movement of goods and services causes damage to local communities. This is because jobs are lost when it becomes cheaper to import a product than to produce it domestically. They also argue that the vast distances travelled by food, oil, and consumer goods is harming the environment and making our lives unsustainable. Protectionists are in favour of tighter controls on the movement of goods and services in order to protect jobs and livelihoods.
+
+In conclusion, while there are convincing arguments on both sides of the debate, a return to protectionist policies would surely be a mistake. I believe that global trade is inevitable and should not be restricted. It is no longer realistic for nations to source all of their energy, food, and manufactured goods within their own borders."""
   }
   return render(request, 'pages/writing.html', context)
+
+def band_score_page(request):
+  context ={
+    'segment': 'band_score'
+  }
+  return render(request, 'pages/band_score.html', context)
 
 # Components
 @login_required(login_url='/accounts/login/')
