@@ -10,6 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth.decorators import login_required
 
+from .forms import EssayForm
+
 sample_writing_text = """One of the most debatable issues of the last century has been the extent to which international trade benefits or harms national economies. Many arguments have been made for and against free trade between nations. In this essay, I will discuss both views and state my own position.
 
 Those who support the expansion of global free trade claim that economies grow faster when they can specialise in just a few industries in which they have a strong advantage. As a result, each region or country produces something of value to the world economy. For example, East Asia manufactures electronic goods, the Middle East exports energy, and the EU produces luxury items. Free trade proponents claim that dependence on global trade helps to strengthen international cooperation and prevent wars.
@@ -26,22 +28,25 @@ def index(request):
 
 @csrf_exempt
 def writing_page(request):
-  print(request)
   if (request.method == 'POST'):
-    response = requests.post(settings.API_URL + '/api/scoring/').json()
-    print(response)
+    print(request.POST)
+    form = EssayForm(request.POST)
+    # response = requests.post(settings.API_URL + '/api/scoring/').json()
+    
     return redirect('writing')
-  
   
   
   
   data = requests.get(settings.API_URL + '/api/questions/').json()
   random_question = data[random.randint(1, len(data)-1)]
-  print(json.dumps(random_question, indent=2))
+  
+  form = EssayForm()
+  
   context = {
     'segment': 'writing',
     'answer': 'Type your answer here...',
-    'question': random_question
+    'question': random_question,
+    'form': form
   }
   return render(request, 'pages/writing.html', context)
 
