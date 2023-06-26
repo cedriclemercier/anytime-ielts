@@ -6,6 +6,7 @@ from admin_datta.forms import RegistrationForm, LoginForm, UserPasswordChangeFor
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetConfirmView, PasswordResetView
 from django.views.generic import CreateView
 from django.contrib.auth import logout
+from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth.decorators import login_required
 
@@ -23,9 +24,13 @@ def index(request):
   }
   return render(request, "pages/index.html", context)
 
+@csrf_exempt
 def writing_page(request):
-  print('-------------------------------')
-  print(request.method)
+  print(request)
+  if (request.method == 'POST'):
+    response = requests.post(settings.API_URL + '/api/scoring').json()
+    print(response)
+    return
   data = requests.get(settings.API_URL + '/api/questions/').json()
   random_question = data[random.randint(1, len(data))]
   print(json.dumps(random_question, indent=2))
