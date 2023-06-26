@@ -11,11 +11,11 @@
     <div class="card">
       <div class="card-header">
         <h4>IELTS Essay Question</h4>
+        <a class="label theme-bg text-white f-12">{{question.topic}}</a>
+        <a class="label theme-bg2 text-white f-12">{{question.question_type}}</a>
       </div>
       <div class="card-block">
-        <p>Some people think that robots are important for human’s future development. Others think that robots have
-          negative effects on society.
-          <br />Discuss both views and give your opinion.
+        <p>{{question.id}}: {{question.question_text}}
         </p>
       </div>
     </div>
@@ -24,24 +24,25 @@
         <h4>Write your answer</h4>
       </div>
       <div class="card-block">
-        <form>
+        <form action="/" method="post" id="writing_form">
           <div class="form-group">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="20">{{answer}}</textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" placeholder="Type your essay here..."></textarea>
           </div>
-        </form>
+        
       </div>
     </div>
   </div>
   <div class="col-sm-3">
     <div class="card" style="border-radius: 10px;">
       <div class="card-block text-center">
-        <button type="button text-center" class="btn btn-primary" title="btn btn-primary" data-toggle="tooltip">START</button>
+        <button type="button text-center" class="btn btn-primary" data-toggle="tooltip">START</button>
         <hr class="invisible">
         <h1>37:02</h1>
         <hr class="invisible">
         <h5>Time Remaining</h5>
         <hr class="invisible">
-        <button type="button text-center" class="btn btn-primary" title="btn btn-primary" data-toggle="tooltip">SCORE MY ESSAY!</button>
+        <button type="submit" class="btn btn-primary" data-toggle="tooltip">SCORE MY ESSAY!</button>
+      </form>
       </div>
     </div>
   </div>

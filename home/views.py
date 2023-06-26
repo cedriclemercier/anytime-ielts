@@ -1,3 +1,6 @@
+import requests, json, random
+
+from django.conf import settings
 from django.shortcuts import render, redirect
 from admin_datta.forms import RegistrationForm, LoginForm, UserPasswordChangeForm, UserPasswordResetForm, UserSetPasswordForm
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetConfirmView, PasswordResetView
@@ -13,6 +16,7 @@ Those who support the expansion of global free trade claim that economies grow f
 Meanwhile, opponents of free trade—sometimes called ‘protectionists’—claim that the unrestricted movement of goods and services causes damage to local communities. This is because jobs are lost when it becomes cheaper to import a product than to produce it domestically. They also argue that the vast distances travelled by food, oil, and consumer goods is harming the environment and making our lives unsustainable. Protectionists are in favour of tighter controls on the movement of goods and services in order to protect jobs and livelihoods.
 
 In conclusion, while there are convincing arguments on both sides of the debate, a return to protectionist policies would surely be a mistake. I believe that global trade is inevitable and should not be restricted. It is no longer realistic for nations to source all of their energy, food, and manufactured goods within their own borders."""
+
 def index(request):
   context = {
     'segment': 'index'
@@ -20,9 +24,15 @@ def index(request):
   return render(request, "pages/index.html", context)
 
 def writing_page(request):
+  print('-------------------------------')
+  print(request.method)
+  data = requests.get(settings.API_URL + '/api/questions/').json()
+  random_question = data[random.randint(1, len(data))]
+  print(json.dumps(random_question, indent=2))
   context = {
     'segment': 'writing',
-    'answer': sample_writing_text
+    'answer': 'Type your answer here...',
+    'question': random_question
   }
   return render(request, 'pages/writing.html', context)
 
