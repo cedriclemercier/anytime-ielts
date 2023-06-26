@@ -46,7 +46,7 @@ def writing_page(request):
     'scored': True,
     'results': response
   }
-    return render(request, 'pages/band_score.html', context)
+    return render(request, 'pages/writing.html', context)
   
   
   
