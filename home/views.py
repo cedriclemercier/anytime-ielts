@@ -28,11 +28,15 @@ def index(request):
 def writing_page(request):
   print(request)
   if (request.method == 'POST'):
-    response = requests.post(settings.API_URL + '/api/scoring').json()
+    response = requests.post(settings.API_URL + '/api/scoring/').json()
     print(response)
-    return
+    return redirect('writing')
+  
+  
+  
+  
   data = requests.get(settings.API_URL + '/api/questions/').json()
-  random_question = data[random.randint(1, len(data))]
+  random_question = data[random.randint(1, len(data)-1)]
   print(json.dumps(random_question, indent=2))
   context = {
     'segment': 'writing',
