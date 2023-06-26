@@ -29,22 +29,36 @@ def index(request):
 @csrf_exempt
 def writing_page(request):
   if (request.method == 'POST'):
+    
+    # form = EssayForm(request.POST)
     payload = {
       'user_answer': request.POST['user_answer'],
       'question_text': request.POST['question_text'],
       'question_type': request.POST['question_type'],
       'question_topic': request.POST['question_topic'],
+      'question_topic': request.POST['question_topic'],
       }
     
     response = requests.post(settings.API_URL + '/api/scoring/', json=payload).json()
     print(response)
+    
+    data = payload
+    data['topic'] = payload['question_topic']
+    
     context = {
     'segment': 'writing',
     'answer': 'Type your answer here...',
     'question': 'Question here',
     'user_answer': sample_writing_text,
     'scored': True,
-    'results': response
+    'results': response,
+    'question': data,
+    'percentages': {
+      'grammar': int(response['grammar_range']['score'] * 10),
+      'lexical': int(response['lexical']['score'] * 10),
+      'task_achievement': int(response['task_achievement']['score'] * 10),
+      'coherence_cohesion': int(response['coherence_cohesion']['score'] * 10)
+    }
   }
     return render(request, 'pages/writing.html', context)
   

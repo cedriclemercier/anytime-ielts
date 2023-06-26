@@ -15,7 +15,7 @@
         <a class="label theme-bg2 text-white f-12">{{question.question_type}}</a>
       </div>
       <div class="card-block">
-        <p>{{question.id}}: {{question.question_text}}
+        <p>{{question.question_text}}
         </p>
       </div>
     </div>
@@ -24,12 +24,15 @@
         <h4>Write your answer</h4>
       </div>
       <div class="card-block">
+        {% if not scored %}
         <form action="http://127.0.0.1:8000/writing/" method="post" id="writing_form">
           <div class="form-group">
             {{form}}
             <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" placeholder="Type your essay here..." name="answer">Testing</textarea> -->
           </div>
-
+        {%else%}
+        <p>{{user_answer}}</p>
+        {%endif%}
       </div>
     </div>
   </div>
@@ -46,14 +49,15 @@
         <h5>Time Remaining</h5>
         <hr class="invisible">
         <button type="submit" class="btn btn-primary" data-toggle="tooltip">SCORE MY ESSAY!</button>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
-  
-  {% else %}
+
+    {% else %}
 
     <!-- IF there is data render the band score -->
 
+    </form>
     <div class="card">
       <div class="card-block text-center">
         <!-- Start progress bar -->
@@ -78,34 +82,37 @@
         <div class="row">
           <div class="col-xl-12">
             <h6 class="align-items-center float-left">Grammatical Range</h6>
-            <h6 class="align-items-center float-right">7.0</h6>
+            <h6 class="align-items-center float-right">{{results.grammar_range.score}}</h6>
             <div class="progress m-t-30 m-b-20" style="height: 6px;">
-              <div class="progress-bar bg-danger" role="progressbar" style="width: 70%;" aria-valuenow="70"
-                aria-valuemin="0" aria-valuemax="100"></div>
+
+              <div class="progress-bar bg-danger" role="progressbar" style="width: {{ percentages.grammar }}%;"
+                aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
           <div class="col-xl-12">
             <h6 class="align-items-center float-left">Lexical Resource</h6>
-            <h6 class="align-items-center float-right">7.0</h6>
+            <h6 class="align-items-center float-right">{{results.lexical.score}}</h6>
             <div class="progress m-t-30 m-b-20" style="height: 6px;">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: 70%;" aria-valuenow="70"
-                aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-warning" role="progressbar" style="width: {{ percentages.lexical }}%;"
+                aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
           <div class="col-xl-12">
             <h6 class="align-items-center float-left">Coherence and Cohesion</h6>
-            <h6 class="align-items-center float-right">6.0</h6>
+            <h6 class="align-items-center float-right">{{results.coherence_cohesion.score}}</h6>
             <div class="progress m-t-30 m-b-20" style="height: 6px;">
-              <div class="progress-bar progress-c-theme2" role="progressbar" style="width: 60%;" aria-valuenow="60"
-                aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-c-theme2" role="progressbar"
+                style="width: {{ percentages.coherence_cohesion }}%;" aria-valuenow="60" aria-valuemin="0"
+                aria-valuemax="100"></div>
             </div>
           </div>
           <div class="col-xl-12">
             <h6 class="align-items-center float-left">Task achievement</h6>
-            <h6 class="align-items-center float-right">6.0</h6>
+            <h6 class="align-items-center float-right">{{results.task_achievement.score}}</h6>
             <div class="progress m-t-30 m-b-20" style="height: 6px;">
-              <div class="progress-bar progress-c-theme" role="progressbar" style="width: 60%;" aria-valuenow="60"
-                aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-c-theme" role="progressbar"
+                style="width: {{ percentages.task_achievement }}%;" aria-valuenow="60" aria-valuemin="0"
+                aria-valuemax="100"></div>
             </div>
           </div>
         </div>
