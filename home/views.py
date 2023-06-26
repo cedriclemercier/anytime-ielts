@@ -29,18 +29,34 @@ def index(request):
 @csrf_exempt
 def writing_page(request):
   if (request.method == 'POST'):
-    print(request.POST)
-    form = EssayForm(request.POST)
-    # response = requests.post(settings.API_URL + '/api/scoring/').json()
+    payload = {
+      'user_answer': request.POST['user_answer'],
+      'question_text': request.POST['question_text'],
+      'question_type': request.POST['question_type'],
+      'question_topic': request.POST['question_topic'],
+      }
     
-    return redirect('writing')
+    response = requests.post(settings.API_URL + '/api/scoring/', json=payload).json()
+    print(response)
+    context = {
+    'segment': 'writing',
+    'answer': 'Type your answer here...',
+    'question': 'Question here',
+    'user_answer': sample_writing_text,
+    'scored': True,
+    'results': response
+  }
+    return render(request, 'pages/band_score.html', context)
   
   
   
   data = requests.get(settings.API_URL + '/api/questions/').json()
   random_question = data[random.randint(1, len(data)-1)]
+  random_question['question_topic'] = random_question['topic']
+  random_question['user_answer'] = 'Type here...'
   
-  form = EssayForm()
+  form = EssayForm(random_question)
+  # form.fields['user_answer'].required = False
   
   context = {
     'segment': 'writing',
