@@ -12,6 +12,10 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import EssayForm
 
+import os
+import openai
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
 sample_writing_text = """One of the most debatable issues of the last century has been the extent to which international trade benefits or harms national economies. Many arguments have been made for and against free trade between nations. In this essay, I will discuss both views and state my own position.
 
 Those who support the expansion of global free trade claim that economies grow faster when they can specialise in just a few industries in which they have a strong advantage. As a result, each region or country produces something of value to the world economy. For example, East Asia manufactures electronic goods, the Middle East exports energy, and the EU produces luxury items. Free trade proponents claim that dependence on global trade helps to strengthen international cooperation and prevent wars.
@@ -39,28 +43,42 @@ def writing_page(request):
       'question_topic': request.POST['question_topic'],
       }
     
-    response = requests.post(settings.API_URL + '/api/scoring/', json=payload).json()
+    # Get feedback from ChatGPT API
+    question = payload["question_text"]
+    answer = payload["user_answer"]
+
+    response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            temperature=0.6,
+            messages=[
+        {"role": "system", "content": "You are a professional IELTS examiner."},
+        {"role": "user", "content": f'Given the question: "{question}"\n Please grade the following response: "{answer}"'},
+      ]
+    )
+    # Dummy feedback
+    # response = requests.post(settings.API_URL + '/api/scoring/', json=payload).json()
+    
     print(response)
     
     data = payload
     data['topic'] = payload['question_topic']
     
-    context = {
-    'segment': 'writing',
-    'answer': 'Type your answer here...',
-    'question': 'Question here',
-    'user_answer': sample_writing_text,
-    'scored': True,
-    'results': response,
-    'question': data,
-    'percentages': {
-      'grammar': int(response['grammar_range']['score'] * 10),
-      'lexical': int(response['lexical']['score'] * 10),
-      'task_achievement': int(response['task_achievement']['score'] * 10),
-      'coherence_cohesion': int(response['coherence_cohesion']['score'] * 10)
-    }
-  }
-    return render(request, 'pages/writing.html', context)
+  #   context = {
+  #   'segment': 'writing',
+  #   'answer': 'Type your answer here...',
+  #   'question': 'Question here',
+  #   'user_answer': sample_writing_text,
+  #   'scored': True,
+  #   'results': response,
+  #   'question': data,
+  #   'percentages': {
+  #     'grammar': int(response['grammar_range']['score'] * 10),
+  #     'lexical': int(response['lexical']['score'] * 10),
+  #     'task_achievement': int(response['task_achievement']['score'] * 10),
+  #     'coherence_cohesion': int(response['coherence_cohesion']['score'] * 10)
+  #   }
+  # }
+    return render(request, 'pages/writing.html')
   
   
   
