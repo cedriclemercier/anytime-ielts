@@ -14,6 +14,7 @@ from .forms import EssayForm
 
 from .prompts import task_achievement, coherence_and_cohesion, lexical_resource, grammatical_range_accuracy
 
+import json
 import os
 import openai
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -49,28 +50,16 @@ def writing_page(request):
     question = payload["question_text"]
     answer = payload["user_answer"]
 
-    feedback = {'task_achievement': {},
-                'coherence_and_cohesion': {},
-                'lexical_resource': {},
-                'grammatical_range_accuracy': {}}
-    
-    feedback['task_achievement'] = task_achievement(question, answer)
-    feedback['coherence_and_cohesion'] = coherence_and_cohesion(question, answer)
-    feedback['lexical_resource'] = lexical_resource(question, answer)
-    feedback['grammatical_range_accuracy'] = grammatical_range_accuracy(question, answer)
+    feedback = {}
 
-    
+    feedback['task_achievement'] = json.loads(task_achievement(question, answer))
+    feedback['coherence_and_cohesion'] = json.loads(coherence_and_cohesion(question, answer))
+    feedback['lexical_resource'] = json.loads(lexical_resource(question, answer))
+    feedback['grammatical_range_accuracy'] = json.loads(grammatical_range_accuracy(question, answer))
+
     print("==============FEEDBACK DICT===============")
     print(feedback)
 
-    # response = openai.ChatCompletion.create(
-    #         model="gpt-3.5-turbo",
-    #         temperature=0.6,
-    #         messages=[
-    #     {"role": "system", "content": "You are a professional IELTS examiner."},
-    #     {"role": "user", "content": f'Given the question: "{question}"\n Please grade the following response: "{answer}"'},
-    #   ]
-    # )
     # Dummy feedback
     # response = requests.post(settings.API_URL + '/api/scoring/', json=payload).json()
     # print(response)
