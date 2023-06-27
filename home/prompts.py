@@ -30,7 +30,7 @@ prompt_template = PromptTemplate(input_variables=["input"], template=template)
 TR_comment_chain = LLMChain(llm=llm, prompt=prompt_template)
 
 template_score = """Reevaluate the given Task achievement comment with the band score to match the Band score criteria, and summarize all the comments into 2-3 sentences.
-Provide the evaluation in JSON format, using the keys "Exact Band" and "Revised comment" to indicate the appropriate band score and the rationale behind the match, respectively.
+Provide the evaluation in JSON format, using the keys "exact_band" and "revised_comment" to indicate the appropriate band score and the rationale behind the match, respectively.
 
 Comment:
 ```{comment}```
@@ -91,7 +91,7 @@ prompt_template = PromptTemplate(input_variables=["input"], template=template)
 CC_comment_chain = LLMChain(llm=llm, prompt=prompt_template)
 
 template_score = """Reevaluate the given Coherence and Cohesion comment with the band score to match the Band score criteria, and summarize all the comments into 2-3 sentences.
-Provide the evaluation in JSON format, using the keys "Exact Band" and "Revised comment" to indicate the appropriate band score and the rationale behind the match, respectively.
+Provide the evaluation in JSON format, using the keys "exact_band" and "revised_comment" to indicate the appropriate band score and the rationale behind the match, respectively.
 
 Comment:
 ```{comment}```
@@ -149,7 +149,7 @@ prompt_template = PromptTemplate(input_variables=["input"], template=template)
 LR_comment_chain = LLMChain(llm=llm, prompt=prompt_template)
 
 template_score = """Reevaluate the given Lexical resource comment with the band score to match the Band score criteria, and summarize all the comments into 2-3 sentences.
-Provide the evaluation in JSON format, using the keys "Exact Band" and "Revised comment" to indicate the appropriate band score and the rationale behind the match, respectively.
+Provide the evaluation in JSON format, using the keys "exact_band" and "revised_comment" to indicate the appropriate band score and the rationale behind the match, respectively.
 
 Comment:
 ```{comment}```
@@ -204,7 +204,7 @@ prompt_template = PromptTemplate(input_variables=["input"], template=template)
 GRA_comment_chain = LLMChain(llm=llm, prompt=prompt_template)
 
 template_score = """Reevaluate the given Grammatical range and Accuracy comment with the band score to match the Band score criteria, and summarize all the comments into 2-3 sentences.
-Provide the evaluation in JSON format, using the keys "Exact Band" and "Revised comment" to indicate the appropriate band score and the rationale behind the match, respectively.
+Provide the evaluation in JSON format, using the keys "exact_band" and "revised_comment" to indicate the appropriate band score and the rationale behind the match, respectively.
 
 Comment:
 ```{comment}```
