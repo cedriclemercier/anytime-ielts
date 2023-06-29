@@ -12,21 +12,15 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import EssayForm
 
-<<<<<<< HEAD
-sample_writing_text = """Social <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#lexical1" aria-expanded="false" aria-controls="lexical1"> networking </button> sites, for instance Facebook, are teach by some to have a detrimental effect on individual people as well as society and local communities. However, while I believe that such sites are mainly beneficial to the individual, I agree that they have had a damaging effect on local communities. With regards to individuals, the impact that online social media has had on each individual person has clear advantages. Firstly, people from different countries are brought together through such sites as Facebook whereas before the development of technology and social networking sites, people rarely had the chance to meet or <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#lexical2" aria-expanded="false" aria-controls="lexical2"> communicate </button> with anyone outside of their immediate circle or community. Secondly, Facebook also has social groups which offer individuals 
-a chance to meet and participate in discussions with people who share common interests. On the other hand, the effect that Facebook and other social networking sites have had on societies and local communities can only be seen as negative. Rather <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#lexical3" aria-expanded="false" aria-controls="lexical3"> than </button> individual people taking part in their local community, they are instead choosing to take more interest in people online. Consequently, the people within local communities are no longer forming close or supportive relationships. Furthermore, 
-society as a whole is becoming increasingly disjointed and fragmented as people spend more time online with people they have never met face to face and who they are unlikely to ever meet in the future. To conclude, 
-although social networking sites have brought individuals closer together, they have not had the same effect on society or local communities. Local communities should do more to <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#lexical4" aria-expanded="false" aria-controls="lexical4"> try </button> and involve local people in local activities in order to promote the future of community life. """
-=======
 from .prompts import task_achievement, coherence_and_cohesion, lexical_resource, grammatical_range_accuracy
 
 import json
 import os
 import openai
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 sample_writing_text = """One of the most debatable issues of the last century has been the extent to which international trade benefits or harms national economies. Many arguments have been made for and against free trade between nations. In this essay, I will discuss both views and state my own position""".
->>>>>>> 5877ddb2984224c29927266290c549e2e6b4fa3c
 
 sample_text = "Social networking sites, for instance Facebook, are teach by some to have a detrimental effect on individual people as well as society and local communities. However, while I believe that such sites are mainly beneficial to the individual, I agree that they have had a damaging effect on local communities.  With regards to individuals, the impact that online social media has had on each individual person has clear advantages. Firstly, people from different countries are brought together through such sites as Facebook whereas before the development of technology and social networking sites, people rarely had the chance to meet or communicate with anyone outside of their immediate circle or community. Secondly, Facebook also has social groups which offer individuals a chance to meet and participate in discussions with people who share common interests. On the other hand, the effect that Facebook and other social networking sites have had on societies and local communities can only be seen as negative. Rather than individual people taking part in their local community, they are instead choosing to take more interest in people online. Consequently, the people within local communities are no longer forming close or supportive relationships. Furthermore, society as a whole is becoming increasingly disjointed and fragmented as people spend more time online with people they have never met face to face and who they are unlikely to ever meet in the future. To conclude, although social networking sites have brought individuals closer together, they have not had the same effect on society or local communities. Local communities should do more to try and involve local people in local activities  in order to promote the future of community life."
 
@@ -71,7 +65,6 @@ def writing_page(request):
       'question_topic': request.POST['question_topic'],
       }
     
-<<<<<<< HEAD
     response = requests.post(settings.API_URL + '/api/scoring/', json=payload).json()
     # Lexical spans
     lexical_spans = response['lexical']['spans'][0]
@@ -79,7 +72,6 @@ def writing_page(request):
 
     user_answer_corrected = put_tags(sample_text, lexical_spans, grammar_spans)
     
-=======
     # Get feedback from ChatGPT API
     question = payload["question_text"]
     answer = payload["user_answer"]
@@ -97,12 +89,10 @@ def writing_page(request):
     # Dummy feedback
     # response = requests.post(settings.API_URL + '/api/scoring/', json=payload).json()
     # print(response)
->>>>>>> 5877ddb2984224c29927266290c549e2e6b4fa3c
     
     data = payload
     data['topic'] = payload['question_topic']
     
-<<<<<<< HEAD
     context = {
     'segment': 'writing',
     'answer': 'Type your answer here...',
@@ -119,7 +109,6 @@ def writing_page(request):
     }
   }
     return render(request, 'pages/writing.html', context)
-=======
   #   context = {
   #   'segment': 'writing',
   #   'answer': 'Type your answer here...',
@@ -136,7 +125,6 @@ def writing_page(request):
   #   }
   # }
     return render(request, 'pages/writing.html')
->>>>>>> 5877ddb2984224c29927266290c549e2e6b4fa3c
   
   
   
@@ -162,20 +150,6 @@ def band_score_page(request):
     'answer': sample_writing_text
   }
   return render(request, 'pages/band_score.html', context)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Components
