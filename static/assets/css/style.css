@@ -10647,18 +10647,6 @@ div.code-toolbar > .toolbar span:hover {
   -webkit-transform-origin: center left;
   transform-origin: center left;
 }
-.progress-circle .progress-right{
-  right: 0;
-}
-.progress-circle .progress-right .progress-bar{
-  left: -100%;
-  border-top-left-radius: 80px;
-  border-bottom-left-radius: 80px;
-  border-right: 0;
-  -webkit-transform-origin: center right;
-  transform-origin: center right;
-  animation: loading-1 0.5s linear forwards;
-}
 .progress-circle .progress-value{
   width: 90%;
   height: 90%;
@@ -10693,10 +10681,141 @@ div.code-toolbar > .toolbar span:hover {
 .progress-circle.green .progress-bar{
   border-color: #1abc9c;
 }
-.progress-circle.green .progress-left .progress-bar{
+.progress-circle.one .progress-left .progress-bar{
+  animation: loading-0 0.5s linear forwards 0.5s;
+}
+
+.progress-circle.two .progress-left .progress-bar{
+  animation: loading-0 0.5s linear forwards 0.5s;
+}
+
+.progress-circle .progress-right{
+  right: 0;
+}
+.progress-circle .progress-right .progress-bar{
+  left: -100%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  border-right: 0;
+  -webkit-transform-origin: center right;
+  transform-origin: center right;
+}
+
+.progress-circle.three .progress-left .progress-bar{
+  animation: loading-0 0.5s linear forwards 0.5s;
+}
+
+.progress-circle.four .progress-left .progress-bar{
+  animation: loading-0 0.5s linear forwards 0.5s;
+}
+
+.progress-circle.five .progress-left .progress-bar{
+  animation: loading-1 0.5s linear forwards 0.5s;
+}
+
+.progress-circle.six .progress-left .progress-bar{
   animation: loading-2 0.5s linear forwards 0.5s;
 }
+
+.progress-circle.seven .progress-left .progress-bar{
+  animation: loading-3 0.5s linear forwards 0.5s;
+}
+
+.progress-circle.eight .progress-left .progress-bar{
+  animation: loading-4 0.5s linear forwards 0.5s;
+}
+
+.progress-circle.nine .progress-left .progress-bar{
+  animation: loading-5 0.5s linear forwards 0.5s;
+}
+
+.progress-circle.one .progress-right .progress-bar{ 
+  animation: loading-1 0.5s linear forwards;
+}
+
+.progress-circle.two .progress-right .progress-bar{ 
+  animation: loading-2 0.5s linear forwards;
+}
+
+.progress-circle.three .progress-right .progress-bar{ 
+  animation: loading-3 0.5s linear forwards;
+}
+
+.progress-circle.four .progress-right .progress-bar{ 
+  animation: loading-4 0.5s linear forwards;
+}
+
+.progress-circle.five .progress-right .progress-bar{ 
+  animation: loading-5 0.5s linear forwards;
+}
+
+.progress-circle.six .progress-right .progress-bar{ 
+  animation: loading-5 0.5s linear forwards;
+}
+
+.progress-circle.seven .progress-right .progress-bar{ 
+  animation: loading-5 0.5s linear forwards;
+}
+
+.progress-circle.eight .progress-right .progress-bar{ 
+  animation: loading-5 0.5s linear forwards;
+}
+
+.progress-circle.nine .progress-right .progress-bar{ 
+  animation: loading-5 0.5s linear forwards;
+}
+@keyframes loading-0{
+  0%{
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100%{
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+}
+
 @keyframes loading-1{
+  0%{
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100%{
+      -webkit-transform: rotate(40deg);
+      transform: rotate(40deg);
+  }
+}
+@keyframes loading-2{
+  0%{
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100%{
+      -webkit-transform: rotate(80deg);
+      transform: rotate(80deg);
+  }
+}
+@keyframes loading-3{
+  0%{
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100%{
+      -webkit-transform: rotate(120deg);
+      transform: rotate(120deg);
+  }
+}
+@keyframes loading-4{
+  0%{
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100%{
+      -webkit-transform: rotate(140deg);
+      transform: rotate(140deg);
+  }
+}
+@keyframes loading-5{
   0%{
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
@@ -10706,47 +10825,27 @@ div.code-toolbar > .toolbar span:hover {
       transform: rotate(180deg);
   }
 }
-@keyframes loading-2{
+
+@keyframes loading-6{
   0%{
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
   }
   100%{
-      -webkit-transform: rotate(144deg);
-      transform: rotate(144deg);
-  }
-}
-@keyframes loading-3{
-  0%{
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
-  }
-  100%{
-      -webkit-transform: rotate(90deg);
-      transform: rotate(90deg);
-  }
-}
-@keyframes loading-4{
-  0%{
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-  }
-  100%{
-      -webkit-transform: rotate(36deg);
-      transform: rotate(36deg);
-  }
-}
-@keyframes loading-5{
-  0%{
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-  }
-  100%{
-      -webkit-transform: rotate(126deg);
-      transform: rotate(126deg);
   }
 }
 @media only screen and (max-width: 990px){
   .progress-circle{ margin-bottom: 20px; }
 }
 
+
+.suggestion {
+  background-color: #FFF9DC;
+  padding: 20px 20px 40px 20px;
+}
+
+textarea.form-control {
+  line-height: 2;
+}
