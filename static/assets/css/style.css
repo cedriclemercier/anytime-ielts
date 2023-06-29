@@ -10657,7 +10657,7 @@ div.code-toolbar > .toolbar span:hover {
   border-right: 0;
   -webkit-transform-origin: center right;
   transform-origin: center right;
-  animation: loading-1 1.8s linear forwards;
+  animation: loading-1 0.5s linear forwards;
 }
 .progress-circle .progress-value{
   width: 90%;
@@ -10694,7 +10694,7 @@ div.code-toolbar > .toolbar span:hover {
   border-color: #1abc9c;
 }
 .progress-circle.green .progress-left .progress-bar{
-  animation: loading-5 1.2s linear forwards 1.8s;
+  animation: loading-2 0.5s linear forwards 0.5s;
 }
 @keyframes loading-1{
   0%{

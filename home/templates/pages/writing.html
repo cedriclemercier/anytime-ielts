@@ -30,9 +30,9 @@
             {{form}}
             <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" placeholder="Type your essay here..." name="answer">Testing</textarea> -->
           </div>
-        {%else%}
-        <p>{{user_answer}}</p>
-        {%endif%}
+          {%else%}
+          <p>{{user_answer |safe }}</p>
+          {%endif%}
       </div>
     </div>
   </div>
@@ -75,49 +75,103 @@
 
         <!-- Start title -->
         <h2>Band Score</h2>
-        <h6>{{results.task_achievement.comment}}</h6>
+        <h6>Writing Task</h6>
 
         <hr class="invisible">
         <!-- Start Scores -->
         <div class="row">
           <div class="col-xl-12">
-            <h6 class="align-items-center float-left">Grammatical Range</h6>
-            <h6 class="align-items-center float-right">{{results.grammar_range.score}}</h6>
-            <div class="progress m-t-30 m-b-20" style="height: 6px;">
+            <a href="#!" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+              aria-controls="collapseOne" style="width: 100%; display: inline-block;">
+              <h6 class="align-items-center float-left">Grammatical Range</h6>
+              <h6 class="align-items-center float-right">{{results.grammar_range.score}}</h6>
+              <div class="progress m-t-30 m-b-20" style="height: 6px;">
 
-              <div class="progress-bar bg-danger" role="progressbar" style="width: {{ percentages.grammar }}%;"
-                aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ percentages.grammar }}%;"
+                  aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </a>
+            <div id="collapseOne" class="card-body collapse" aria-labelledby="headingOne"
+              data-parent="#accordionExample">
+              {{results.grammar_range.comment}}
+            </div>
+          </div>
+
+          <div class="col-xl-12">
+            <a href="#!" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+              aria-controls="collapseTwo" style="width: 100%; display: inline-block;">
+              <h6 class="align-items-center float-left">Lexical Resource</h6>
+              <h6 class="align-items-center float-right">{{results.lexical.score}}</h6>
+              <div class="progress m-t-30 m-b-20" style="height: 6px;">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ percentages.lexical }}%;"
+                  aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </a>
+            <div id="collapseTwo" class="collapse card-body" aria-labelledby="headingTwo"
+              data-parent="#accordionExample">
+              {{results.lexical.comment}}
+              sustainable VHS.
             </div>
           </div>
           <div class="col-xl-12">
-            <h6 class="align-items-center float-left">Lexical Resource</h6>
-            <h6 class="align-items-center float-right">{{results.lexical.score}}</h6>
-            <div class="progress m-t-30 m-b-20" style="height: 6px;">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: {{ percentages.lexical }}%;"
-                aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+            <a href="#!" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
+              aria-controls="collapseThree" style="width: 100%; display: inline-block;">
+              <h6 class="align-items-center float-left">Coherence and Cohesion</h6>
+              <h6 class="align-items-center float-right">{{results.coherence_cohesion.score}}</h6>
+              <div class="progress m-t-30 m-b-20" style="height: 6px;">
+                <div class="progress-bar progress-c-theme2" role="progressbar"
+                  style="width: {{ percentages.coherence_cohesion }}%;" aria-valuenow="60" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+            </a>
+            <div id="collapseThree" class="card-body collapse" aria-labelledby="headingThree"
+              data-parent="#accordionExample">
+              {{results.coherence_cohesion.comment}}
             </div>
           </div>
           <div class="col-xl-12">
-            <h6 class="align-items-center float-left">Coherence and Cohesion</h6>
-            <h6 class="align-items-center float-right">{{results.coherence_cohesion.score}}</h6>
-            <div class="progress m-t-30 m-b-20" style="height: 6px;">
-              <div class="progress-bar progress-c-theme2" role="progressbar"
-                style="width: {{ percentages.coherence_cohesion }}%;" aria-valuenow="60" aria-valuemin="0"
-                aria-valuemax="100"></div>
-            </div>
-          </div>
-          <div class="col-xl-12">
-            <h6 class="align-items-center float-left">Task achievement</h6>
-            <h6 class="align-items-center float-right">{{results.task_achievement.score}}</h6>
-            <div class="progress m-t-30 m-b-20" style="height: 6px;">
-              <div class="progress-bar progress-c-theme" role="progressbar"
-                style="width: {{ percentages.task_achievement }}%;" aria-valuenow="60" aria-valuemin="0"
-                aria-valuemax="100"></div>
+            <a href="#!" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true"
+              aria-controls="collapseFour" style="width: 100%; display: inline-block;">
+              <h6 class="align-items-center float-left">Task achievement</h6>
+              <h6 class="align-items-center float-right">{{results.task_achievement.score}}</h6>
+              <div class="progress m-t-30 m-b-20" style="height: 6px;">
+                <div class="progress-bar progress-c-theme" role="progressbar"
+                  style="width: {{ percentages.task_achievement }}%;" aria-valuenow="60" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+            </a>
+            <div id="collapseFour" class="card-body collapse" aria-labelledby="headingFour"
+              data-parent="#accordionExample">
+              {{results.task_achievement.comment}}
             </div>
           </div>
         </div>
 
       </div>
+    </div>
+
+    <div class="card">
+      <div class="card-block text-center">
+        <h3>Comments</h3>
+      </div>
+
+      <!-- Grammar -->
+      {% for result in results.grammar_range.corrections %}
+      <div class="collapse" id="grammar{{forloop.counter}}">
+        <div class="card-body">
+          <p class="mb-0">{{result}}</p>
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- Lexical -->
+      {% for result in results.lexical.synonyms %}
+      <div class="collapse" id="lexical{{forloop.counter}}">
+        <div class="card-body">
+          <p class="mb-0">{{result}}</p>
+        </div>
+      </div>
+      {% endfor %}
     </div>
 
 

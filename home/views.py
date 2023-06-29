@@ -12,13 +12,34 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import EssayForm
 
-sample_writing_text = """One of the most debatable issues of the last century has been the extent to which international trade benefits or harms national economies. Many arguments have been made for and against free trade between nations. In this essay, I will discuss both views and state my own position.
+sample_writing_text = """Social <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#lexical1" aria-expanded="false" aria-controls="lexical1"> networking </button> sites, for instance Facebook, are teach by some to have a detrimental effect on individual people as well as society and local communities. However, while I believe that such sites are mainly beneficial to the individual, I agree that they have had a damaging effect on local communities. With regards to individuals, the impact that online social media has had on each individual person has clear advantages. Firstly, people from different countries are brought together through such sites as Facebook whereas before the development of technology and social networking sites, people rarely had the chance to meet or <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#lexical2" aria-expanded="false" aria-controls="lexical2"> communicate </button> with anyone outside of their immediate circle or community. Secondly, Facebook also has social groups which offer individuals 
+a chance to meet and participate in discussions with people who share common interests. On the other hand, the effect that Facebook and other social networking sites have had on societies and local communities can only be seen as negative. Rather <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#lexical3" aria-expanded="false" aria-controls="lexical3"> than </button> individual people taking part in their local community, they are instead choosing to take more interest in people online. Consequently, the people within local communities are no longer forming close or supportive relationships. Furthermore, 
+society as a whole is becoming increasingly disjointed and fragmented as people spend more time online with people they have never met face to face and who they are unlikely to ever meet in the future. To conclude, 
+although social networking sites have brought individuals closer together, they have not had the same effect on society or local communities. Local communities should do more to <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#lexical4" aria-expanded="false" aria-controls="lexical4"> try </button> and involve local people in local activities in order to promote the future of community life. """
 
-Those who support the expansion of global free trade claim that economies grow faster when they can specialise in just a few industries in which they have a strong advantage. As a result, each region or country produces something of value to the world economy. For example, East Asia manufactures electronic goods, the Middle East exports energy, and the EU produces luxury items. Free trade proponents claim that dependence on global trade helps to strengthen international cooperation and prevent wars.
+sample_text = "Social networking sites, for instance Facebook, are teach by some to have a detrimental effect on individual people as well as society and local communities. However, while I believe that such sites are mainly beneficial to the individual, I agree that they have had a damaging effect on local communities.  With regards to individuals, the impact that online social media has had on each individual person has clear advantages. Firstly, people from different countries are brought together through such sites as Facebook whereas before the development of technology and social networking sites, people rarely had the chance to meet or communicate with anyone outside of their immediate circle or community. Secondly, Facebook also has social groups which offer individuals a chance to meet and participate in discussions with people who share common interests. On the other hand, the effect that Facebook and other social networking sites have had on societies and local communities can only be seen as negative. Rather than individual people taking part in their local community, they are instead choosing to take more interest in people online. Consequently, the people within local communities are no longer forming close or supportive relationships. Furthermore, society as a whole is becoming increasingly disjointed and fragmented as people spend more time online with people they have never met face to face and who they are unlikely to ever meet in the future. To conclude, although social networking sites have brought individuals closer together, they have not had the same effect on society or local communities. Local communities should do more to try and involve local people in local activities  in order to promote the future of community life."
 
-Meanwhile, opponents of free trade—sometimes called ‘protectionists’—claim that the unrestricted movement of goods and services causes damage to local communities. This is because jobs are lost when it becomes cheaper to import a product than to produce it domestically. They also argue that the vast distances travelled by food, oil, and consumer goods is harming the environment and making our lives unsustainable. Protectionists are in favour of tighter controls on the movement of goods and services in order to protect jobs and livelihoods.
-
-In conclusion, while there are convincing arguments on both sides of the debate, a return to protectionist policies would surely be a mistake. I believe that global trade is inevitable and should not be restricted. It is no longer realistic for nations to source all of their energy, food, and manufactured goods within their own borders."""
+def put_tags(text, lexical_ranges=None, grammar_ranges=None):
+    # 1. Step1: Put words under tags
+    words = text.split()
+    # Concat arrays
+    
+    btn_classes = ['btn-warning', 'btn-danger']
+    error_class = ['lexical', 'grammar']
+    
+    all_ranges = [lexical_ranges, grammar_ranges]
+    for i, curr_range in enumerate(all_ranges):
+        if curr_range is None:
+            continue
+        for idx, (start, end) in enumerate(curr_range):
+            # temp fix
+            # start -= 1
+            # end -= 1
+            offset = (idx * 2) + (2 * i)
+            words[start+offset:end+offset] = [f'<button class=" {btn_classes[i]}" type="button" data-toggle="collapse" data-target="#{error_class[i]}{idx+1}" aria-expanded="false" aria-controls="lexical{idx+1}">'] + words[start+offset:end+offset] + [f'</button>']
+        result = ' '.join(words)
+    return result
+    
 
 def index(request):
   context = {
@@ -40,7 +61,12 @@ def writing_page(request):
       }
     
     response = requests.post(settings.API_URL + '/api/scoring/', json=payload).json()
-    print(response)
+    # Lexical spans
+    lexical_spans = response['lexical']['spans'][0]
+    grammar_spans = response['grammar_range']['spans']
+
+    user_answer_corrected = put_tags(sample_text, lexical_spans, grammar_spans)
+    
     
     data = payload
     data['topic'] = payload['question_topic']
@@ -49,7 +75,7 @@ def writing_page(request):
     'segment': 'writing',
     'answer': 'Type your answer here...',
     'question': 'Question here',
-    'user_answer': sample_writing_text,
+    'user_answer': user_answer_corrected,
     'scored': True,
     'results': response,
     'question': data,
