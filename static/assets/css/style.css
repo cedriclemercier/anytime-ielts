@@ -10850,3 +10850,7 @@ div.code-toolbar > .toolbar span:hover {
 textarea.form-control {
   line-height: 2;
 }
+
+.writing-task-selection:hover {
+  background-color: #FFFFC8;
+}

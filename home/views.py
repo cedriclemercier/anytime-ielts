@@ -65,8 +65,10 @@ def put_tags(text, lexical_ranges=None, grammar_ranges=None):
     
 
 def index(request):
+  data = requests.get(settings.API_URL + '/api/questions/').json()
   context = {
-    'segment': 'index'
+    'segment': 'index',
+    'questions': data
   }
   return render(request, "pages/index.html", context)
 
@@ -142,11 +144,18 @@ def writing_page(request):
   # }
     return render(request, 'pages/writing.html')
   
+  # IF GET:
+  if "task" in request.GET:
+    data = requests.get(settings.API_URL + '/api/questions/' + request.GET['task']).json()
+    random_question =data
+    random_question['question_topic'] = data['topic']
+    random_question['user_answer'] = data['user_answer']
   
-  data = requests.get(settings.API_URL + '/api/questions/').json()
-  random_question = data[random.randint(1, len(data)-1)]
-  random_question['question_topic'] = random_question['topic']
-  random_question['user_answer'] = random_question['user_answer']
+  else:
+    data = requests.get(settings.API_URL + '/api/questions/').json()
+    random_question = data[random.randint(1, len(data)-1)]
+    random_question['question_topic'] = random_question['topic']
+    random_question['user_answer'] = random_question['user_answer']
 
 
   form = EssayForm(random_question)
