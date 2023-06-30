@@ -56,7 +56,10 @@ def put_tags(text, lexical_ranges=None, grammar_ranges=None):
             # end -= 1
             if lexical_ranges: second_offset == i
             offset = (idx * 2) + (2 * second_offset)
-            words[start+offset:end+offset] = [f'<button class=" {btn_classes[i]}" type="button" data-toggle="collapse" style="border:0; padding: 0;" data-target="#{error_class[i]}{idx+1}" aria-expanded="false" aria-controls="lexical{idx+1}"><span style="padding: 2px 3px" data-toggle="tooltip" title="({idx+1})"><span>'] + words[start+offset:end+offset] + [f'</button>']
+            if (start == end):
+              words[start+offset:end+offset] = [f'<button class=" {btn_classes[i]}" type="button" data-toggle="collapse" style="border:0; padding: 0;" data-target="#{error_class[i]}{idx+1}" aria-expanded="false" aria-controls="lexical{idx+1}"><span style="padding: 2px 3px" data-toggle="tooltip" title="({idx+1})"><span> ( ➕ )'] + words[start+offset:end+offset] + [f'</button>']
+            else:
+              words[start+offset:end+offset] = [f'<button class=" {btn_classes[i]}" type="button" data-toggle="collapse" style="border:0; padding: 0;" data-target="#{error_class[i]}{idx+1}" aria-expanded="false" aria-controls="lexical{idx+1}"><span style="padding: 2px 3px" data-toggle="tooltip" title="({idx+1})"><span>'] + words[start+offset:end+offset] + [f'</button>']
         result = ' '.join(words)
     return result
     
@@ -96,7 +99,7 @@ def writing_page(request):
     lexical = response['lexical']['score']
     grammar_range_score = response['grammar_range']['score']
 
-    user_answer_corrected = put_tags(sample_text, lexical_spans, grammar_spans)
+    user_answer_corrected = put_tags(request.POST['user_answer'], lexical_spans, grammar_spans)
     
     
     data = payload
