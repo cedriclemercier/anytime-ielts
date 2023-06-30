@@ -10,12 +10,13 @@
   <div class="col-sm-9">
     <div class="card">
       <div class="card-header">
-        <h4>IELTS Essay Question</h4>
+        <h4>IELTS Writing Task 2</h4>
         <a class="label theme-bg text-white f-12">{{question.topic}}</a>
         <a class="label theme-bg2 text-white f-12">{{question.question_type}}</a>
       </div>
       <div class="card-block">
         <p>{{question.question_text}}
+        <p><b>You should give reasons for your answer and include any relevant examples from your own experience or knowledge to support your response. Keep your response around 250 words.</b></p>
         </p>
       </div>
     </div>
@@ -75,7 +76,7 @@
 
         <!-- Start title -->
         <h2>Band Score</h2>
-        <h6>Writing Task</h6>
+        <h6 style="font-size: 30px">Writing Task 2</h6>
 
         <hr class="invisible">
         <!-- Start Scores -->
@@ -203,7 +204,7 @@
   }
 
   // Set the countdown duration in seconds
-  const countdownDuration = 3600;
+  const countdownDuration = 2400;
 
   // Get the timer element
   const timerElement = document.getElementById('timer');
