@@ -56,7 +56,6 @@ def put_tags(text, lexical_ranges=None, grammar_ranges=None):
             # end -= 1
             if lexical_ranges: second_offset == i
             offset = (idx * 2) + (2 * second_offset)
-            print(offset)
             words[start+offset:end+offset] = [f'<button class=" {btn_classes[i]}" type="button" data-toggle="collapse" style="border:0; padding: 0;" data-target="#{error_class[i]}{idx+1}" aria-expanded="false" aria-controls="lexical{idx+1}"><span style="padding: 2px 3px" data-toggle="tooltip" title="({idx+1})"><span>'] + words[start+offset:end+offset] + [f'</button>']
         result = ' '.join(words)
     return result
@@ -83,7 +82,7 @@ def writing_page(request):
     
     response = requests.post(settings.API_URL + '/api/scoring/', json=payload).json()
     
-    print(response)
+    print(json.dumps(response ,indent=2))
     # Lexical spans
     lexical_spans = None
     if "spans" in response['lexical']:
