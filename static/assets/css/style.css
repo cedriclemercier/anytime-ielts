@@ -10854,3 +10854,8 @@ textarea.form-control {
 .writing-task-selection .card-body:hover {
   background-color: #F8f8f8;
 }
+
+.b-brand .b-bg.logocolor {
+  /* background: linear-gradient(-135deg, #3BC47E 0%, #3BC47E 100%) !; */
+  background: #3BC47E !important;
+}
