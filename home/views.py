@@ -99,23 +99,6 @@ def writing_page(request):
 
     user_answer_corrected = put_tags(sample_text, lexical_spans, grammar_spans)
     
-    # Get feedback from ChatGPT API
-    # question = payload["question_text"]
-    # answer = payload["user_answer"]
-
-    # feedback = {}
-
-    # feedback['task_achievement'] = json.loads(task_achievement(question, answer))
-    # feedback['coherence_and_cohesion'] = json.loads(coherence_and_cohesion(question, answer))
-    # feedback['lexical_resource'] = json.loads(lexical_resource(question, answer))
-    # feedback['grammatical_range_accuracy'] = json.loads(grammatical_range_accuracy(question, answer))
-
-    # print("==============FEEDBACK DICT===============")
-    # print(feedback)
-
-    # Dummy feedback
-    # response = requests.post(settings.API_URL + '/api/scoring/', json=payload).json()
-    # print(response)
     
     data = payload
     data['topic'] = payload['question_topic']
