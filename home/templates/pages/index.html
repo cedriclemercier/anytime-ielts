@@ -28,11 +28,14 @@
 
 
     <div class="card">
-      <div class="card-header">
-        <h5>Question {{forloop.counter}}</h5>
-        <a class="label theme-bg text-white f-12">{{question.topic}}</a>
-        <a class="label theme-bg2 text-white f-12">{{question.question_type}}</a>
-      </div>
+      <a href="/writing?task={{question.id}}" class="writing-task-selection">
+
+        <div class="card-header">
+          <h5>Question {{forloop.counter}}</h5>
+          <a class="label theme-bg text-white f-12">{{question.topic}}</a>
+          <a class="label theme-bg2 text-white f-12">{{question.question_type}}</a>
+        </div>
+      </a>
       <a href="/writing?task={{question.id}}" class="writing-task-selection">
         <div class="card-body">
           <p class="text-muted mb-4">{{question.question_text}}</p>
