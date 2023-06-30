@@ -93,3 +93,14 @@ body.dark {
     background-color: transparent; }
 
 
+body.dark .progress-circle .progress-value {
+  color: #fff;
+}
+
+body.dark .suggestion h5 {
+  color: #000 !important;
+}
+
+body.dark .suggestion strong {
+  color: #000;
+}
