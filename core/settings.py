@@ -42,7 +42,7 @@ if RENDER_EXTERNAL_HOSTNAME:
 
 # Application definition
 
-API_URL = 'http://127.0.0.1:5000'
+API_URL = os.environ.get('API_URL')
 
 INSTALLED_APPS = [
     'admin_datta.apps.AdminDattaConfig',
