@@ -65,6 +65,7 @@ def put_tags(text, lexical_ranges=None, grammar_ranges=None):
     
 
 def index(request):
+  print("Request to index!")
   data = requests.get(settings.API_URL + '/api/questions/').json()
   context = {
     'segment': 'index',
