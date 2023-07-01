@@ -104,7 +104,8 @@ DB_NAME     = os.getenv('DB_NAME'     , None)
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql'
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway'
     }
 }
 
