@@ -4,6 +4,7 @@ python-dotenv
 whitenoise
 django-admin-datta==1.0.10
 langchain 
-
+gunicorn==20.1.0
+whitenoise==6.2.0
 # psycopg2-binary
 # mysqlclient
