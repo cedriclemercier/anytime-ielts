@@ -165,7 +165,8 @@ def writing_page(request):
     'segment': 'writing',
     'answer': 'Type your answer here...',
     'question': random_question,
-    'form': form
+    'form': form,
+    'api_url': settings.API_URL
   }
   return render(request, 'pages/writing.html', context)
 

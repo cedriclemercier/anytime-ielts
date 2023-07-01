@@ -26,7 +26,7 @@
       </div>
       <div style="padding: 10px 25px 25px 25px;" class="card-block">
         {% if not scored %}
-        <form action="http://127.0.0.1:8000/writing/" onsubmit="openLoader()" method="post" id="writing_form">
+        <form action="{{ request.path }}" onsubmit="openLoader()" method="post" id="writing_form">
           <div class="form-group">
             {{form}}
             <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" placeholder="Type your essay here..." name="answer">Testing</textarea> -->
