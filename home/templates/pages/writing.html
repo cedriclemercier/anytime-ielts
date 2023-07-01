@@ -29,7 +29,6 @@
         <form action="{{ request.path }}" onsubmit="openLoader()" method="post" id="writing_form">
           <div class="form-group">
             {{form}}
-            <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" placeholder="Type your essay here..." name="answer">Testing</textarea> -->
           </div>
           {%else%}
           <p style="font-weight:700; line-height: 2.0; text-align: justify;">{{user_answer |safe }}</p>

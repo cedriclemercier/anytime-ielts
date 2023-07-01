@@ -85,8 +85,9 @@ def writing_page(request):
       'question_topic': request.POST['question_topic'],
       }
     
-    response = requests.post(settings.API_URL + '/api/scoring/', json=payload).json()
-    
+    response = requests.post(settings.API_URL + '/api/scoring/', json=payload)
+    print(response)
+    response = response.json()
     print(json.dumps(response ,indent=2))
     # Lexical spans
     lexical_spans = None
