@@ -8,6 +8,7 @@ from django.views.generic import CreateView
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_exempt
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .forms import EssayForm
@@ -63,6 +64,12 @@ def put_tags(text, lexical_ranges=None, grammar_ranges=None):
         result = ' '.join(words)
     return result
     
+def error_page(request, error_message):
+    context = {
+      'segment': 'error',
+      'data': error_message
+    }
+    return render(request, 'pages/error.html', context)
 
 def index(request):
   print("Request to index!")
@@ -89,7 +96,10 @@ def writing_page(request):
     response = requests.post(settings.API_URL + '/api/scoring/', json=payload)
     print(response)
     response = response.json()
+    print("=========================")
     print(json.dumps(response ,indent=2))
+    if ('error' in response):
+      return render(request, 'pages/error.html', {'data': response})
     # Lexical spans
     lexical_spans = None
     if "spans" in response['lexical']:

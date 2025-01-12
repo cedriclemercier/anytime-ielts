@@ -7,6 +7,7 @@ urlpatterns = [
   path('', views.index, name='index'),
   path('writing/', views.writing_page, name='writing'),
   path('band_score/', views.band_score_page, name='band_score'),
+  path('error/', views.error_page, name='error_page'),
 
   # Components
   path('components/button/', views.bc_button, name='bc_button'),
