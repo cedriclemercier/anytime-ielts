@@ -17,3 +17,11 @@ Use our pre-answered template or enter your own custom response. You have 40 min
 ![image](https://github.com/cedriclemercier/anytime-ielts/assets/53874620/f30bdfb6-249a-429b-9775-0eaad3d3b3c9)
 
 Get your IELTS Band Score and breakdown as well as personalized suggestions on how to best improve your grammar and vocabulary.
+
+## How to use
+
+`.env` file has API_URL for the API URL of the backend
+
+`python -m venv venv` followed by `source venv/Scripts/activate` on Windows
+
+Run `pip install -r requirements.txt` preferably inside `venv`
